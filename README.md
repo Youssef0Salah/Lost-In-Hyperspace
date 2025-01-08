@@ -32,42 +32,51 @@ Principal Component Analysis (PCA) is a dimensionality reduction technique that 
 
 The PCA process can be described mathematically as follows:
 
-1. **Mean Centering:**
-   \[
-   Z = X - \mu
-   \]
-2. **Standardization:**
-   \[
-   Z_{scaled} = \frac{Z}{\sigma}
-   \]
-3. **Covariance Matrix:**
-   \[
-   \Sigma = \frac{1}{N} Z^T Z
-   \]
-4. **Eigenvalue Decomposition:**
-   \[
-   \Sigma v = \lambda v
-   \]
-5. **Sort Eigenvalues and Eigenvectors:**
-   \[
-   \lambda_{sorted} = \text{argsort}(\lambda)[::-1]
-   \]
-   \[
-   v_{sorted} = v[:, \lambda_{sorted}]
-   \]
-6. **Projection onto Principal Components:**
-   \[
-   X_{projected} = Z_{scaled} \cdot v_{sorted}[:, :k]
-   \]
+1. **Mean Centering the Data**: The data is first centered by subtracting the mean of each feature to ensure that the data has zero mean.
+
+    ```
+    Z = X - μ
+    ```
+
+2. **Standardization**: The data is then standardized by scaling each feature to have unit variance.
+
+    ```
+    Z_scaled = Z / σ
+    ```
+
+3. **Covariance Matrix**: We calculate the covariance matrix, which measures how features co-vary.
+
+    ```
+    Σ = (1/N) * Z^T * Z
+    ```
+
+4. **Eigenvalue Decomposition**: The eigenvalues and eigenvectors of the covariance matrix are calculated. The eigenvalues indicate the variance along each eigenvector (principal component).
+
+    ```
+    Σ * v = λ * v
+    ```
+
+5. **Sorting Eigenvalues and Eigenvectors**: The eigenvalues are sorted in descending order, and the corresponding eigenvectors are reordered.
+
+    ```
+    λ_sorted = argsort(λ)[::-1]
+    v_sorted = v[:, λ_sorted]
+    ```
+
+6. **Projection onto Principal Components**: Finally, the data is projected onto the principal components corresponding to the largest eigenvalues. This reduces the dimensionality of the data.
+
+    ```
+    X_projected = Z_scaled * v_sorted[:, :k]
+    ```
 
 Where:
-- \( X \) is the data matrix,
-- \( Z \) is the mean-centered data,
-- \( \mu \) is the mean vector,
-- \( \sigma \) is the standard deviation vector,
-- \( \Sigma \) is the covariance matrix,
-- \( v \) are the eigenvectors, and
-- \( \lambda \) are the eigenvalues.
+- `X` is the data matrix,
+- `Z` is the mean-centered data,
+- `μ` is the mean vector,
+- `σ` is the standard deviation vector,
+- `Σ` is the covariance matrix,
+- `v` are the eigenvectors, and
+- `λ` are the eigenvalues.
 
 ## Solution
 We recommened you answer this yourself.<br>
